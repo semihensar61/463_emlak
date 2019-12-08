@@ -1,43 +1,23 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const axios = require("axios");
-// var timeout = express.timeout // express v3 and below
-// var timeout = require('connect-timeout'); //express v4
-
+const mongoose = require("mongoose");
 const app = express();
-const cron = require("node-cron");
-const fs = require("fs");
 
-let num = 0;
-
-cron.schedule("* * * * * ", function() {
-  console.log("new users are written");
-  num++;
-  function getUser(pageNum) {
-    return axios.default
-      .get(`https://reqres.in/api/users?page=${pageNum}`)
-      .then(response => {
-        return response.data;
-      });
-  }
-  getUser(num).then(response => {
-    console.log(response);
-    response = JSON.stringify(response.data);
-    fs.writeFile("./usersFile.txt", response);
-
-    //everyminute a new page is written in usersFile.txt
+mongoose
+  .connect(
+    "mongodb://semihensar61:880861ts@ds147420.mlab.com:47420/semo-database"
+  )
+  .then(() => {
+    console.log("connected to database");
+  })
+  .catch(() => {
+    console.log("connection failed");
   });
-});
+
+
 
 app.use(bodyParser.json({ limit: "50mb" }));
-app.use(
-  bodyParser.urlencoded({
-    limit: "50mb",
-    extended: true,
-    parameterLimit: 500000,
-    timedout: 1000
-  })
-);
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -52,7 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/users", require("./routes/user"));
+// app.use("/xlxs", require("./routes/xlxs"));
 
 app.listen(3000);
 
