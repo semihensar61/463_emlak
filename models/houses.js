@@ -24,6 +24,7 @@ const houses = mongoose.Schema({
   Aidat: { type: String },
   Depozito: { type: String },
   Kimden: { type: String },
+  kat: {type: String},
   lat: { type: String },
   lon: { type: String }
 

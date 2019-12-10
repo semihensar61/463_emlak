@@ -18,6 +18,7 @@
   "homepage": "https://github.com/semihensar61/project_payever#readme",
   "description": "",
   "dependencies": {
+    "ahp": "^2.2.2",
     "axios": "^0.19.0",
     "fs": "0.0.1-security",
     "himalaya": "^1.1.0",
@@ -26,6 +27,7 @@
     "htmlparser2": "^4.0.0",
     "node-cron": "^2.0.3",
     "node-xlsx": "^0.15.0",
+    "q": "^1.5.1",
     "read-excel-file": "^4.0.4",
     "string-to-stream": "^3.0.1",
     "xlsx": "^0.15.1"

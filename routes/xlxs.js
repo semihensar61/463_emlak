@@ -51,6 +51,22 @@ router.get(`/`, async (req, res) => {
     xlData[i].Kimden = xlData[i].Kimden.trim();
     xlData[i].floor = xlData[i].floor.trim();
     xlData[i].SiteIcerisinde = xlData[i].SiteIcerisinde.trim();
+
+    if(xlData[i].floor != "30 ve üzeri" || xlData[i].floor !="Bahçe Katı" || xlData[i].floor != "Çatı Katı"||xlData[i].floor != "Kot 1"||xlData[i].floor !=  "Müstakil"||xlData[i].floor != "Yüksek Giriş"){
+      xlData[i].kat = "1-29";
+    }else{
+      xlData[i].kat = xlData[i].floor;
+    }
+    let array_age_0_15 = ['0','1','2','3','4','5-10 arası', '11-15 arası'];
+    let array_age_15_30 = ['16-20 arası', '21-25 arası','26-30 arası'];
+
+    if(array_age_0_15.includes(xlData[i].age)){
+      xlData[i].age = '0-15 arası'
+    }else if(array_age_15_30.includes(xlData[i].age)){
+      xlData[i].age = '16-30 arası'
+    }else{
+      xlData[i].age = '30 ve üzeri'
+    }
   }
 
   console.log(xlData);
@@ -79,6 +95,7 @@ router.get(`/`, async (req, res) => {
     Aidat: xlData[i].Aidat,
     Depozito: xlData[i].Depozito,
     Kimden: xlData[i].Kimden,
+    kat: xlData[i].kat,
     lat: xlData[i].lat,
     lon: xlData[i].lon })
 

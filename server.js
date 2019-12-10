@@ -32,7 +32,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use("/xlxs", require("./routes/xlxs"));
+app.use('/filter', require('./routes/filter'));
+app.use("/xlxs", require("./routes/xlxs"));
 
 app.listen(3000);
 
