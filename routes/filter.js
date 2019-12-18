@@ -101,27 +101,38 @@ router.post('/',async (req, res)=>{
             );
             let output = ahpContext.run();
             console.log(output);
-            // console.log(typeof output.rankedScores[0]);    
-            const highest_score = Math.max(...output.rankedScores);
-            console.log(highest_score);
-            let recomended_house_ListingId 
-            for(let i = 0; i<output.rankedScores.length; i++){
-                if(highest_score == output.rankedScores[i]){
-                    recomended_house_ListingId = item[i]; 
-                    House.findOne({
-                        listingID: recomended_house_ListingId
-                    }).then(recomended_house => {
-                        console.log('-----RECOMENDED HOUSE-----');
-                        console.log(recomended_house);
-        
-                        res.status(200).json({
-                            recomended_house: recomended_house,
-                            filter_houses: filtered_houses_array,
-                            "msg": "success"
+
+            if(output.criteriaRankMetaMap.cr>0.1){
+                console.log("not consistent")
+                res.status(200).json({
+                    recomended_house: "AHP Criteria rankings are not consistent!",
+                    filter_houses: filtered_houses_array,
+                  });
+            }else{
+                console.log("consistent");
+                // console.log(typeof output.rankedScores[0]);    
+                const highest_score = Math.max(...output.rankedScores);
+                console.log(highest_score);
+                let recomended_house_ListingId 
+                for(let i = 0; i<output.rankedScores.length; i++){
+                    if(highest_score == output.rankedScores[i]){
+                        recomended_house_ListingId = item[i]; 
+                        House.findOne({
+                            listingID: recomended_house_ListingId
+                        }).then(recomended_house => {
+                            console.log('-----RECOMENDED HOUSE-----');
+                            console.log(recomended_house);
+            
+                            res.status(200).json({
+                                recomended_house: recomended_house,
+                                filter_houses: filtered_houses_array,
+                                "msg": "success"
+                            })
                         })
-                    })
+                    }
                 }
             }
+            
 
         }else{
             res.status(200).json({
