@@ -19,7 +19,7 @@
   "description": "",
   "dependencies": {
     "ahp": "^2.2.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "fs": "0.0.1-security",
     "himalaya": "^1.1.0",
     "html-parser": "^0.11.0",
