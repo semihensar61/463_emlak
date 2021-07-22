@@ -30,6 +30,6 @@
     "q": "^1.5.1",
     "read-excel-file": "^4.0.4",
     "string-to-stream": "^3.0.1",
-    "xlsx": "^0.15.1"
+    "xlsx": "^0.17.0"
   }
 }
