@@ -28,7 +28,7 @@
     "node-cron": "^2.0.3",
     "node-xlsx": "^0.15.0",
     "q": "^1.5.1",
-    "read-excel-file": "^4.0.4",
+    "read-excel-file": "^5.5.1",
     "string-to-stream": "^3.0.1",
     "xlsx": "^0.15.1"
   }
